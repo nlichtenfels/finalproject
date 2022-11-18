@@ -48,5 +48,17 @@ var startButton = new Button({
 
 //scene 1 function
 var scene1 = function () {
-  background(120,180,200);
+    background(12, 227, 126);
+    strokeWeight(1);
+    textSize(30);
+    fill(0, 0, 0);
+    text("Flappy Bird", 95, 95);
+    textSize(10);
+    text("by Nathan Lichtenfels", 10, 380);
+    text("and Ryan Kraus", 307, 380);
+    fill(255, 255, 255);
+    rect(15, 275, 83, 100);
+    rect(300, 275, 83, 100);
+    drawbitmoji(10, 260, 70);
+    startButton.draw();
 };
