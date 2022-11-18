@@ -44,7 +44,80 @@ var startButton = new Button({
     }
 });
 
+mouseClicked = function () {
+    startbutton.handleMouseClick();
+};
+
 //drawbitmoji function
+var drawbody = function (bitmojiX,bitmojiY,bitmojiHeight) {
+
+    stroke(217,214,217);
+    fill(217, 214, 217);
+    rect(bitmojiX+(bitmojiHeight/150*50),bitmojiY+(bitmojiHeight/150*130),bitmojiHeight/150*95,bitmojiHeight/150*100);
+    ellipse(bitmojiX+(bitmojiHeight/150*53),bitmojiY+(bitmojiHeight/150*184),(bitmojiHeight/150*47),(bitmojiHeight/150*113));
+    ellipse(bitmojiX+(bitmojiHeight/150*146),bitmojiY+(bitmojiHeight/150*184),(bitmojiHeight/150*47),(bitmojiHeight/150*113));
+
+    stroke(0,0,0); //initials
+    line(bitmojiX+(bitmojiHeight/150*75),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*75),bitmojiY+(bitmojiHeight/150*180));
+    line(bitmojiX+(bitmojiHeight/150*75),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*90),bitmojiY+(bitmojiHeight/150*180));
+    line(bitmojiX+(bitmojiHeight/150*90),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*90),bitmojiY+(bitmojiHeight/150*180));
+    line(bitmojiX+(bitmojiHeight/150*105),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*105),bitmojiY+(bitmojiHeight/150*180));
+    line(bitmojiX+(bitmojiHeight/150*105),bitmojiY+(bitmojiHeight/150*180),bitmojiX+(bitmojiHeight/150*120),bitmojiY+(bitmojiHeight/150*180));
+
+};
+
+var drawhead = function (bitmojiX,bitmojiY,bitmojiHeight) {
+   
+    stroke(255, 220, 177);
+    fill(255,220,177);
+    ellipse(bitmojiX+(bitmojiHeight/150*100),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*80),(bitmojiHeight/150*90));
+
+};
+
+var drawface = function (bitmojiX,bitmojiY,bitmojiHeight) {
+
+    stroke(0,0,0); //lefteye
+    fill(255, 255, 255);
+    ellipse(bitmojiX+(bitmojiHeight/150*85),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*10),(bitmojiHeight/150*10));
+
+    stroke(37, 98, 196); //left pupil
+    ellipse(bitmojiX+(bitmojiHeight/150*85),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*2),(bitmojiHeight/150*2));
+
+    stroke(0,0,0); // right eye
+    fill(255, 255, 255);
+    ellipse(bitmojiX+(bitmojiHeight/150*115),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*10),(bitmojiHeight/150*10));
+
+    stroke(37, 98, 196); //right pupil
+    ellipse(bitmojiX+(bitmojiHeight/150*115),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*2),(bitmojiHeight/150*2));
+
+    stroke(0,0,0); //mouth
+    arc(bitmojiX+(bitmojiHeight/150*100),bitmojiY+(bitmojiHeight/150*120),(bitmojiHeight/150*40),(bitmojiHeight/150*-15),-180,0);
+    line(bitmojiX+(bitmojiHeight/150*80),bitmojiY+(bitmojiHeight/150*120),bitmojiX+(bitmojiHeight/150*120),bitmojiY+(bitmojiHeight/150*120));
+
+    stroke(102, 76, 40); //hair
+    fill(102, 76, 40);
+    ellipse(bitmojiX+(bitmojiHeight/150*100),bitmojiY+(bitmojiHeight/150*66),(bitmojiHeight/150*54),(bitmojiHeight/150*24));
+    ellipse(bitmojiX+(bitmojiHeight/150*80),bitmojiY+(bitmojiHeight/150*72),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+    ellipse(bitmojiX+(bitmojiHeight/150*123),bitmojiY+(bitmojiHeight/150*72),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+    ellipse(bitmojiX+(bitmojiHeight/150*106),bitmojiY+(bitmojiHeight/150*72),(bitmojiHeight/150*35),(bitmojiHeight/150*21));
+    ellipse(bitmojiX+(bitmojiHeight/150*114),bitmojiY+(bitmojiHeight/150*61),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+    ellipse(bitmojiX+(bitmojiHeight/150*88),bitmojiY+(bitmojiHeight/150*62),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+    ellipse(bitmojiX+(bitmojiHeight/150*65),bitmojiY+(bitmojiHeight/150*84),(bitmojiHeight/150*16),(bitmojiHeight/150*22));
+    ellipse(bitmojiX+(bitmojiHeight/150*137),bitmojiY+(bitmojiHeight/150*84),(bitmojiHeight/150*16),(bitmojiHeight/150*22));
+
+    stroke(0,0,0); //nose
+    fill(255,220,177);
+    bezier(bitmojiX+(bitmojiHeight/150*98),bitmojiY+(bitmojiHeight/150*101),bitmojiX+(bitmojiHeight/150*109),bitmojiY+(bitmojiHeight/150*102),bitmojiX+(bitmojiHeight/150*112),bitmojiY+(bitmojiHeight/150*115),bitmojiX+(bitmojiHeight/150*96),bitmojiY+(bitmojiHeight/150*110));
+
+};
+
+var drawbitmoji = function (bitmojiX,bitmojiY,bitmojiHeight) {
+  
+    drawbody(bitmojiX,bitmojiY,bitmojiHeight);
+    drawhead(bitmojiX,bitmojiY,bitmojiHeight);
+    drawface(bitmojiX,bitmojiY,bitmojiHeight);
+
+};
 
 //scene 1 function
 var scene1 = function () {
