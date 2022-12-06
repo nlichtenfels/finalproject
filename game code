@@ -1,0 +1,278 @@
+//global variables
+var currentScene = 0;
+var numPipes = 100;
+
+//khan button class + modifiers
+var Button = function(config) {
+    this.x = config.x || 0;
+    this.y = config.y || 0;
+    this.width = config.width || 150;
+    this.height = config.height || 50;
+    this.color = config.color;
+    this.label = config.label || "Click";
+    this.onClick = config.onClick || function() {};
+};
+
+Button.prototype.draw = function() {
+    fill(this.color);
+    rect(this.x, this.y, this.width, this.height, 5);
+    fill(0, 0, 0);
+    textSize(19);
+    textAlign(LEFT, TOP);
+    text(this.label, this.x+10, this.y+this.height/4);
+};
+
+Button.prototype.isMouseInside = function() {
+    return mouseX > this.x &&
+           mouseX < (this.x + this.width) &&
+           mouseY > this.y &&
+           mouseY < (this.y + this.height);
+};
+
+Button.prototype.handleMouseClick = function() {
+    if (this.isMouseInside()) {
+        this.onClick();
+    }
+};
+
+var startButton = new Button({
+    x: 125,
+    y: 300,
+    color: (176, 219, 227),
+    label: "   Start game!",
+    onClick: function() {
+        currentScene = 1;
+    }
+});
+
+var restartButton = new Button({
+    x: 70,
+    y: 285,
+    width: 120,
+    label: " Try Again!",
+    onClick: function() {
+        currentScene = 1;
+    }
+});
+
+var quitButton = new Button({
+    x: 210,
+    y: 285,
+    width: 120,
+    label: " Quit Game",
+    onClick: function() {
+        currentScene = 0;
+    }
+});
+
+//drawbitmoji function
+var drawbody = function (bitmojiX,bitmojiY,bitmojiHeight) {
+
+stroke(217,214,217);
+fill(217, 214, 217);
+rect(bitmojiX+(bitmojiHeight/150*50),bitmojiY+(bitmojiHeight/150*130),bitmojiHeight/150*95,bitmojiHeight/150*100);
+ellipse(bitmojiX+(bitmojiHeight/150*53),bitmojiY+(bitmojiHeight/150*184),(bitmojiHeight/150*47),(bitmojiHeight/150*113));
+ellipse(bitmojiX+(bitmojiHeight/150*146),bitmojiY+(bitmojiHeight/150*184),(bitmojiHeight/150*47),(bitmojiHeight/150*113));
+
+stroke(0,0,0); //initials
+line(bitmojiX+(bitmojiHeight/150*75),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*75),bitmojiY+(bitmojiHeight/150*180));
+line(bitmojiX+(bitmojiHeight/150*75),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*90),bitmojiY+(bitmojiHeight/150*180));
+line(bitmojiX+(bitmojiHeight/150*90),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*90),bitmojiY+(bitmojiHeight/150*180));
+line(bitmojiX+(bitmojiHeight/150*105),bitmojiY+(bitmojiHeight/150*150),bitmojiX+(bitmojiHeight/150*105),bitmojiY+(bitmojiHeight/150*180));
+line(bitmojiX+(bitmojiHeight/150*105),bitmojiY+(bitmojiHeight/150*180),bitmojiX+(bitmojiHeight/150*120),bitmojiY+(bitmojiHeight/150*180));
+
+};
+
+var drawhead = function (bitmojiX,bitmojiY,bitmojiHeight) {
+   
+stroke(255, 220, 177);
+fill(255,220,177);
+ellipse(bitmojiX+(bitmojiHeight/150*100),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*80),(bitmojiHeight/150*90));
+
+};
+
+var drawface = function (bitmojiX,bitmojiY,bitmojiHeight) {
+
+stroke(0,0,0); //lefteye
+fill(255, 255, 255);
+ellipse(bitmojiX+(bitmojiHeight/150*85),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*10),(bitmojiHeight/150*10));
+
+stroke(37, 98, 196); //left pupil
+ellipse(bitmojiX+(bitmojiHeight/150*85),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*2),(bitmojiHeight/150*2));
+
+stroke(0,0,0); // right eye
+fill(255, 255, 255);
+ellipse(bitmojiX+(bitmojiHeight/150*115),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*10),(bitmojiHeight/150*10));
+
+stroke(37, 98, 196); //right pupil
+ellipse(bitmojiX+(bitmojiHeight/150*115),bitmojiY+(bitmojiHeight/150*100),(bitmojiHeight/150*2),(bitmojiHeight/150*2));
+
+stroke(0,0,0); //mouth
+arc(bitmojiX+(bitmojiHeight/150*100),bitmojiY+(bitmojiHeight/150*120),(bitmojiHeight/150*40),(bitmojiHeight/150*-15),-180,0);
+line(bitmojiX+(bitmojiHeight/150*80),bitmojiY+(bitmojiHeight/150*120),bitmojiX+(bitmojiHeight/150*120),bitmojiY+(bitmojiHeight/150*120));
+
+stroke(102, 76, 40); //hair
+fill(102, 76, 40);
+ellipse(bitmojiX+(bitmojiHeight/150*100),bitmojiY+(bitmojiHeight/150*66),(bitmojiHeight/150*54),(bitmojiHeight/150*24));
+ellipse(bitmojiX+(bitmojiHeight/150*80),bitmojiY+(bitmojiHeight/150*72),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+ellipse(bitmojiX+(bitmojiHeight/150*123),bitmojiY+(bitmojiHeight/150*72),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+ellipse(bitmojiX+(bitmojiHeight/150*106),bitmojiY+(bitmojiHeight/150*72),(bitmojiHeight/150*35),(bitmojiHeight/150*21));
+ellipse(bitmojiX+(bitmojiHeight/150*114),bitmojiY+(bitmojiHeight/150*61),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+ellipse(bitmojiX+(bitmojiHeight/150*88),bitmojiY+(bitmojiHeight/150*62),(bitmojiHeight/150*32),(bitmojiHeight/150*21));
+ellipse(bitmojiX+(bitmojiHeight/150*65),bitmojiY+(bitmojiHeight/150*84),(bitmojiHeight/150*16),(bitmojiHeight/150*22));
+ellipse(bitmojiX+(bitmojiHeight/150*137),bitmojiY+(bitmojiHeight/150*84),(bitmojiHeight/150*16),(bitmojiHeight/150*22));
+
+stroke(0,0,0); //nose
+fill(255,220,177);
+bezier(bitmojiX+(bitmojiHeight/150*98),bitmojiY+(bitmojiHeight/150*101),bitmojiX+(bitmojiHeight/150*109),bitmojiY+(bitmojiHeight/150*102),bitmojiX+(bitmojiHeight/150*112),bitmojiY+(bitmojiHeight/150*115),bitmojiX+(bitmojiHeight/150*96),bitmojiY+(bitmojiHeight/150*110));
+
+};
+
+var drawbitmoji = function (bitmojiX,bitmojiY,bitmojiHeight) {
+
+strokeWeight(1);
+drawbody(bitmojiX,bitmojiY,bitmojiHeight);
+drawhead(bitmojiX,bitmojiY,bitmojiHeight);
+drawface(bitmojiX,bitmojiY,bitmojiHeight);
+
+};
+
+//playable character constructor function + modifiers
+var character = function(x, y) {
+    this.x = x;
+    this.y = y;
+};
+
+character.prototype.draw = function() {
+    this.y = constrain(this.y, -10, height-45);
+    drawbitmoji(this.x, this.y, 40);
+};
+
+
+character.prototype.up = function() {
+    this.y -= 4;
+};
+
+character.prototype.down = function() {
+    this.y += 4;
+};
+
+character.prototype.checkCollision = function(pipe) {
+    if( (pipe.x >= (this.x - 50) && pipe.x <= (this.x + 50) ) && 
+        (pipe.y >= (this.y - 100) && pipe.y <= (this.y + 200 ) ) ||
+        (pipe.x >= (this.x - 50) && pipe.x <= (this.x + 50) ) && 
+        (pipe.y >= (this.y + 300) && pipe.y <= (this.y + 500 ) ) ) {
+        
+        //plays death scene
+        currentScene = 2;
+        
+    }
+};
+
+//playable character definition
+var characterPlay = new character(20, 180);
+
+//pipes constructor function + modifiers
+var pipe = function(x, y) {
+    this.x = x;
+    this.y = y;
+};
+
+pipe.prototype.draw = function() {
+    fill(96, 173, 83);
+    stroke(84, 150, 72);
+    strokeWeight(2);
+    
+    //long section of pipe
+    rect(this.x, this.y-200, 50, 300);
+    rect(this.x, this.y+240, 50, 300);
+    
+    //short top section of pipe
+    rect(this.x-5, this.y+100, 60, 10);
+    rect(this.x-5, this.y+240, 60, 10);
+};
+
+//array that holds random pipe positions
+var pipes = [];
+
+//for loop that creates random pipe locations
+for(var i = 0; i < numPipes; i++) {
+    pipes.push(new pipe(i * 250 + 300, random(-125,150)));    
+}
+
+//scene functions
+
+    //scene1 function
+    var scene1 = function () {
+        background(12, 227, 126);
+        strokeWeight(1);
+        textSize(30);
+        fill(0, 0, 0);
+        text("Flappy Bird", 115, 95);
+        textSize(10);
+        text("by Nathan Lichtenfels", 10, 380);
+        text("and Ryan Kraus", 307, 380);
+        fill(255, 255, 255);
+        rect(15, 275, 83, 100);
+        rect(300, 275, 83, 100);
+        drawbitmoji(10, 260, 70);
+        startButton.draw();
+    };
+
+    //scene 2
+    var scene2 = function() {
+        background(255, 255, 255);
+        characterPlay.draw();
+    };  
+    
+    //death scene
+    var scene3 = function() {
+        stroke(5, 84, 6);
+        fill(35, 158, 121);
+        rect(50, 50, 300, 300);
+        fill(3, 56, 3);
+        textSize(40);
+        text("Game Over!", 90, 90);
+        stroke(0, 0, 0);
+        strokeWeight(1);
+        fill(222, 141, 27);
+        restartButton.draw();
+        quitButton.draw();
+    };
+    
+    
+//mouseclicked function
+mouseClicked = function() {
+    startButton.handleMouseClick();
+};
+    
+draw = function() {
+    
+    if (currentScene === 0) {
+        scene1();
+    }
+    else if (currentScene === 1) {
+        scene2();
+            
+            //allows for character movement + basic character physics
+            if (keyIsPressed && key.code === 32) {
+                characterPlay.up();
+            }
+            else  {
+                characterPlay.down(); 
+            }
+            
+                //draws pipes from pipes array + makes pipes move
+                for (var i =0; i < numPipes; i++) {
+                    pipes[i].draw(); 
+                    characterPlay.checkCollision(pipes[i]);
+                    pipes[i].x -= 2;
+                }
+    }
+    else if (currentScene === 2) {
+        scene3();
+    }
+    
+    
+    
+};
