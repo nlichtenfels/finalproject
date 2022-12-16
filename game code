@@ -2,6 +2,8 @@
 var currentScene = 0;
 var numPipes = 100;
 
+
+
 //khan button class + modifiers
 var Button = function(config) {
     this.x = config.x || 0;
@@ -137,6 +139,106 @@ drawface(bitmojiX,bitmojiY,bitmojiHeight);
 
 };
 
+// Ryans Bitmoji
+  var drawBody = function(hX,hY,h)
+    {
+        
+         noStroke();
+        var p = h/100;
+       
+    //hood
+    fill(49, 64, 17);
+    ellipse(hX+101*p,hY+154*p,69*p,47*p);
+    //shoulders
+    fill(49, 64, 17);
+    ellipse(hX+103*p,hY+173*p,91*p,50*p);
+    //body
+     rect(hX+75*p,hY+159*p,57*p,40*p);
+    ellipse(hX+66*p,hY+182*p,25*p,47*p);//arms
+    ellipse(hX+139*p,hY+182*p,25*p,47*p);
+    fill(49, 64, 17);
+    rect(hX+58*p,hY+192*p,90*p,13*p);
+    //initials
+    fill(255, 0, 0);
+     textSize(15*p);
+    text("RK",hX+92*p,hY+184*p);
+   
+    };
+
+
+
+            var drawHead = function(hX,hY,h)
+            {
+                  noStroke();
+                var p = h/100;
+            //Head
+            fill(224, 172, 105);
+            ellipse(hX+101*p,hY+93*p,84*p,97*p);
+            //cheekbones
+            fill(255, 255, 255);
+            
+             
+            ellipse(hX+62*p,hY+107*p,16*p,56*p);
+            ellipse(hX+140*p,hY+107*p,16*p,56*p);
+            //hair
+            fill(0, 0, 0);
+            ellipse(hX+101*p,hY+54*p,67*p,38*p);
+            ellipse(hX+73*p,hY+72*p,23*p,51*p);
+            ellipse(hX+129*p,hY+72*p,23*p,51*p);
+            //neck
+            noStroke();
+            fill(224, 172, 105);
+            rect(hX+88*p,hY+134*p,26*p,23*p);
+
+            //Freckles
+            noStroke();
+            fill(71, 43, 17);
+            ellipse(hX+117*p,hY+101*p,2*p,2*p);
+            
+            ellipse(hX+93*p,hY+105*p,1*p,1*p);
+            ellipse(hX+81*p,hY+100*p,1*p,1*p);
+            ellipse(hX+84*p,hY+107*p,1*p,1*p);
+            ellipse(hX+91*p,hY+100*p,1*p,1*p);
+            ellipse(hX+75*p,hY+106*p,1*p,1*p);
+            ellipse(hX+98*p,hY+99*p,1*p,1*p);
+            ellipse(hX+113*p,hY+103*p,1*p,1*p);
+            ellipse(hX+121*p,hY+103*p,1*p,1*p);
+            ellipse(hX+119*p,hY+97*p,1*p,1*p);
+            ellipse(hX+127*p,hY+102*p,1*p,1*p);
+          
+             //Eyes
+            fill(19, 16, 74);
+            rect(hX+85*p,hY+92*p,9*p,3*p); //left eye
+            ellipse(hX+112*p,hY+93*p,8*p,8*p); //right eye
+            //mouth
+            stroke(209, 38, 38);
+            fill(255, 255, 255);
+            arc(hX+101*p, hY+117*p, 34*p, 30*p, 0, 180);
+            line(hX+83*p,hY+116*p,hX+117*p,hY+116*p);
+             //Nose
+            stroke(0, 0, 0);
+            fill(224, 172, 105);
+        bezier(hX+100*p,hY+87*p,hX+107*p,hY+106*p,hX+118*p,hY+100*p,hX+99*p,hY+103*p);
+           
+        //hat
+       
+        fill(247, 223, 163);
+        stroke(247,223,163);
+        arc(hX+101*p, hY+64*p, 80*p, 66*p, 170, 370);
+        rect(hX+61*p,hY+61*p,24*p,19*p);
+        rect(hX+117*p,hY+61*p,24*p,19*p);
+        fill(27, 24, 115);
+        stroke(27, 24, 115);
+        rect(hX+81*p,hY+74*p,42*p,7*p);
+        };
+
+var drawBitmoji = function(hX,hY,h)
+{
+drawBody(hX,hY,h);
+drawHead(hX,hY,h);
+
+};
+
 //playable character constructor function + modifiers
 var character = function(x, y) {
     this.x = x;
@@ -216,13 +318,16 @@ for(var i = 0; i < numPipes; i++) {
         rect(15, 275, 83, 100);
         rect(300, 275, 83, 100);
         drawbitmoji(10, 260, 70);
+        drawBitmoji(292,266,50);
         startButton.draw();
     };
 
     //scene 2
     var scene2 = function() {
-        background(255, 255, 255);
+        
+       background(255, 255, 255);
         characterPlay.draw();
+        
     };  
     
     //death scene
