@@ -8,6 +8,7 @@ var speed = 2;
 var canScore = true;
 var canJump = true;
 var dead = false;
+var fc = 0;
 
 //khan button class + modifiers
 var Button = function(config) {
@@ -48,7 +49,9 @@ var startButton = new Button({
     color: color(255, 255, 255),
     label: "   Start game!",
     onClick: function() {
-        currentScene = 1;
+        if(currentScene === 0) {
+            currentScene = 1;
+        }
     }
 });
 
@@ -58,7 +61,9 @@ var restartButton = new Button({
     width: 120,
     label: " Try Again!",
     onClick: function() {
-        currentScene = 1;
+        if(currentScene === 2 && fc >= 30) {
+            currentScene = 1;
+        }
     }
 });
 
@@ -68,7 +73,9 @@ var quitButton = new Button({
     width: 120,
     label: " Quit Game",
     onClick: function() {
-        currentScene = 0;
+        if(currentScene === 2 && fc >= 30) {
+            currentScene = 0;
+        }
     }
 });
 
@@ -330,7 +337,7 @@ var pipes = [];
 
 //for loop that creates random pipe locations at game start
 for(var i = 0; i < numPipes; i++) {
-    pipes.push(new pipe(i * 250 + 300, random(-100, 130)));
+    pipes.push(new pipe(i * 250 + 300, random(-100, 120)));
 }
 
 //creates new pipe locations + gets rid of old values
@@ -341,7 +348,7 @@ var resetGame = function () {
     
     //pushes new values
     for(var i = 0; i < numPipes; i++) {
-        pipes.push(new pipe(i * 250 + 300, random(-100,130))); 
+        pipes.push(new pipe(i * 250 + 300, random(-100,120))); 
     }
     
 };
@@ -349,12 +356,13 @@ var resetGame = function () {
 //fulfills try again button
 var initGame = function() {
     //reset game state
+    
     score = 0;
     
     //reset character state
     dead = false;
-    characterPlay.y = 200; 
-    
+    characterPlay.y = 200;
+   
     //redraw pipes + test for collision
     for (var i =0; i < numPipes; i++) {
         if(!dead){
@@ -478,12 +486,15 @@ mouseReleased = function() {
 //mouseclicked function
 mouseClicked = function() {
     startButton.handleMouseClick();
-    
+    restartButton.handleMouseClick();
+    quitButton.handleMouseClick();
 };
 
-draw = function() {  
+draw = function() {
+    
     if (currentScene === 0) {
         scene1();
+        fc = 0;
     }
     else if (currentScene === 1) {
         scene2();
@@ -491,6 +502,9 @@ draw = function() {
             resetGame();
             initGame();
         }
+        
+        //reset framecount
+        fc =0;
         
         //bird physics 
         tbc += 0.1;
@@ -503,7 +517,9 @@ draw = function() {
             else  {
                 characterPlay.down(); 
             }
-
+            
+            
+            
                 //draws pipes from pipes array + makes pipes move
                 for (var i =0; i < numPipes; i++) {
                     if(!dead){
@@ -513,6 +529,7 @@ draw = function() {
                     pipes[i].x -= 2;
                     }
                 }
+                    
                         //display score
                         stroke(0,0,0);
                         fill(255, 255, 255);
@@ -526,7 +543,6 @@ draw = function() {
                             highScore = score;
                         }
                         
-                        //sends pipes off screen after death
                         if(dead) {
                             for (var i =0; i < numPipes; i++) {
                                 pipes[i].y -= 1000;
@@ -535,5 +551,6 @@ draw = function() {
     }
     else if (currentScene === 2) {
         scene3();
+        fc++;
     }
 };
