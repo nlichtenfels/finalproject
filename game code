@@ -1,6 +1,6 @@
 //global variables
 var currentScene = 0;
-var numPipes = 100;
+var numPipes = 200;
 var score = 0;
 var highScore = 0;
 var tbc = 0;
@@ -43,6 +43,7 @@ Button.prototype.handleMouseClick = function() {
     }
 };
 
+//button definitions
 var startButton = new Button({
     x: 125,
     y: 300,
@@ -267,42 +268,45 @@ var drawBird = function(x,y) {
     ellipse(23+x,52+y,17,8);
 };
 
-//playable character constructor function + modifiers
+//playable character constructor function
 var character = function(x, y) {
     this.x = x;
     this.y = y;
 };
 
+//character draw method
 character.prototype.draw = function() {
-    this.y = constrain(this.y, -10, height-45);
+    this.y = constrain(this.y, -30, height - 45);
     drawBird(this.x, this.y);
 };
 
-//character movement, 
+//character movement
 character.prototype.down = function() {
     this.y += speed*tbc;
 };
 
+//collision model
 character.prototype.checkCollision = function(pipe) {
-    if(this.x+50>=pipe.x&&this.x-40<=pipe.x) {
+    if(this.x + 50 >= pipe.x && this.x - 40 <= pipe.x) {
         
         //set canScore to false after countscore
         if(canScore) {
             canScore = false;
         }
         
-        if(this.y-75 <=pipe.y||this.y-180>=pipe.y){    
+        if(this.y - 75 <= pipe.y || this.y - 180 >= pipe.y){    
             //plays death scene
             currentScene = 2;
             dead = true;
         }
         //count score if canScore 
-        if(this.x-40 >= pipe.x) {
+        if(this.x - 40 >= pipe.x) {
             score++;
             canScore = true;
         }
     }
     if(this.y>=320) {
+        //play death scene
         currentScene = 2;
         dead = true;
     }
@@ -312,12 +316,13 @@ character.prototype.checkCollision = function(pipe) {
 //playable character definition
 var characterPlay = new character(20, 180);
 
-//pipes constructor function + modifiers
+//pipes constructor function
 var pipe = function(x, y) {
     this.x = x;
     this.y = y;
 };
 
+//draw method
 pipe.prototype.draw = function() {
     fill(96, 173, 83);
     stroke(84, 150, 72);
@@ -356,7 +361,6 @@ var resetGame = function () {
 //fulfills try again button
 var initGame = function() {
     //reset game state
-    
     score = 0;
     
     //reset character state
@@ -459,7 +463,7 @@ mouseReleased = function() {
         noStroke();
         rect(x + i*20, 368,10,7);  
     }
-
+    
     characterPlay.draw();
     
     };  
@@ -498,6 +502,8 @@ draw = function() {
     }
     else if (currentScene === 1) {
         scene2();
+        
+        //boolean expression that resets game state if player loses then restarts
         if(dead) {
             resetGame();
             initGame();
@@ -518,9 +524,7 @@ draw = function() {
                 characterPlay.down(); 
             }
             
-            
-            
-                //draws pipes from pipes array + makes pipes move
+                //draw and move pipes (only for first game attempt)
                 for (var i =0; i < numPipes; i++) {
                     if(!dead){
                     //draws and moves pipes left +2 pixels a frame
@@ -543,6 +547,7 @@ draw = function() {
                             highScore = score;
                         }
                         
+                        //removes pipes on player death
                         if(dead) {
                             for (var i =0; i < numPipes; i++) {
                                 pipes[i].y -= 1000;
@@ -551,6 +556,7 @@ draw = function() {
     }
     else if (currentScene === 2) {
         scene3();
+        //start fc to set button delay
         fc++;
     }
 };
