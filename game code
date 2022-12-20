@@ -2,7 +2,66 @@
 var currentScene = 0;
 var numPipes = 100;
 
+//Background
+var drawBg = function() {
+background(105, 198, 224);
+var building = 98;
+var x = 10;
 
+//Clouds
+noStroke();
+rect(0,314-40,401,135);
+for (var c = 0; c < 4; c++)
+{
+    ellipse(124 * c,313- 50,66,69);
+    ellipse(124 * c - 86, 327-50,52,71);
+    ellipse(125 * c + 79, 320-50,59,68);
+}
+//Buildings
+fill(214, 210, 219);
+stroke(20, 134, 179);
+for(var i = 0; i<9; i++)
+{
+rect(building * i - 40,340 - 50, 19 ,119);
+rect(building * i - 52,349 - 50, 28 ,53);
+rect(building * i - 32,359 - 50, 18 ,47);
+rect(building * i - 1, 344 - 50,32,58);
+rect(building * i - 17,324 - 50, 27 ,100);
+
+}
+var windows = [];
+for (var w = 0; w < 30; w++)
+{
+   // rect(11 * b, 331,1,4);
+}
+
+//Bushes
+for (var b = 0; b < 7; b++)
+{
+    fill(80, 209, 54);
+    ellipse(78 * b - 50, 390 - 50 ,42,46);
+    ellipse(78 * b, 390 - 50, 42,40);
+    ellipse(78 * b - 26, 390 - 50, 43,30);
+    ellipse(78 * b - 58, 392 - 50, 39,30);
+    ellipse(78 * b - 82, 400 - 50, 36,30);
+    ellipse(78 * b - 27, 399 - 50, 38,30);
+}
+//Foreground 
+fill(227, 230, 147);
+rect(0, 355,400,50);
+fill(63, 245, 17);
+rect(0, 348, 400, 8);
+draw = function() {
+    
+
+for (var s = 0; s < 44; s++)
+{
+    fill(29, 194, 8);
+    rect(x * s , 348,3,8);
+}
+
+};
+};
 
 //khan button class + modifiers
 var Button = function(config) {
@@ -39,7 +98,7 @@ Button.prototype.handleMouseClick = function() {
 
 var startButton = new Button({
     x: 125,
-    y: 300,
+    y: 296,
     color: (176, 219, 227),
     label: "   Start game!",
     onClick: function() {
@@ -306,19 +365,19 @@ for(var i = 0; i < numPipes; i++) {
 
     //scene1 function
     var scene1 = function () {
-        background(12, 227, 126);
+       drawBg();
         strokeWeight(1);
         textSize(30);
         fill(0, 0, 0);
         text("Flappy Bird", 115, 95);
         textSize(10);
-        text("by Nathan Lichtenfels", 10, 380);
-        text("and Ryan Kraus", 307, 380);
+        text("by Nathan Lichtenfels", 10, 369);
+        text("and Ryan Kraus", 307, 369);
         fill(255, 255, 255);
-        rect(15, 275, 83, 100);
-        rect(300, 275, 83, 100);
-        drawbitmoji(10, 260, 70);
-        drawBitmoji(292,266,50);
+        rect(15, 245, 83, 100);
+        rect(300, 245, 83, 100);
+        drawbitmoji(10, 227, 70);
+        drawBitmoji(292,236,50);
         startButton.draw();
     };
 
