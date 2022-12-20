@@ -2,9 +2,35 @@
 var currentScene = 0;
 var numPipes = 100;
 
+
+//Bird Code
+var drawBird = function(x,y) {
+    
+   stroke(0, 0, 0);
+    //Body
+    fill(251, 255, 0);
+    ellipse(70 + x,150 + y,34,29);
+    //Eye
+    fill(242, 239, 242);
+    ellipse(78+x,146+y,15,13);
+    fill(0, 0, 0);
+    ellipse(79+x,145+y,2,3);
+    //Beak
+    fill(245, 98, 0);
+    ellipse(85+x,153+y,17,8);
+      ellipse(85+x,157+y,15,5);
+    //Wing
+    fill(255, 250, 189);
+    ellipse(58+x,152+y,17,8);
+};
+
+
+
+
 //Background
 var drawBg = function() {
 background(105, 198, 224);
+noLoop();
 var building = 98;
 var x = 10;
 
@@ -13,6 +39,7 @@ noStroke();
 rect(0,314-40,401,135);
 for (var c = 0; c < 4; c++)
 {
+    fill(255, 255, 255);
     ellipse(124 * c,313- 50,66,69);
     ellipse(124 * c - 86, 327-50,52,71);
     ellipse(125 * c + 79, 320-50,59,68);
@@ -365,7 +392,10 @@ for(var i = 0; i < numPipes; i++) {
 
     //scene1 function
     var scene1 = function () {
-       drawBg();
+       
+        drawBg();
+      drawBird(121,3);
+     
         strokeWeight(1);
         textSize(30);
         fill(0, 0, 0);
