@@ -330,7 +330,7 @@ var pipes = [];
 
 //for loop that creates random pipe locations at game start
 for(var i = 0; i < numPipes; i++) {
-    pipes.push(new pipe(i * 250 + 300, random(-100, 100)));
+    pipes.push(new pipe(i * 250 + 300, random(-100, 130)));
 }
 
 //creates new pipe locations + gets rid of old values
@@ -341,7 +341,7 @@ var resetGame = function () {
     
     //pushes new values
     for(var i = 0; i < numPipes; i++) {
-        pipes.push(new pipe(i * 250 + 300, random(-115,165))); 
+        pipes.push(new pipe(i * 250 + 300, random(-100,130))); 
     }
     
 };
@@ -349,12 +349,12 @@ var resetGame = function () {
 //fulfills try again button
 var initGame = function() {
     //reset game state
-    
     score = 0;
     
     //reset character state
     dead = false;
-   
+    characterPlay.y = 200; 
+    
     //redraw pipes + test for collision
     for (var i =0; i < numPipes; i++) {
         if(!dead){
@@ -481,8 +481,7 @@ mouseClicked = function() {
     
 };
 
-draw = function() {
-    
+draw = function() {  
     if (currentScene === 0) {
         scene1();
     }
@@ -504,9 +503,7 @@ draw = function() {
             else  {
                 characterPlay.down(); 
             }
-            
-            
-            
+
                 //draws pipes from pipes array + makes pipes move
                 for (var i =0; i < numPipes; i++) {
                     if(!dead){
@@ -516,7 +513,6 @@ draw = function() {
                     pipes[i].x -= 2;
                     }
                 }
-                    
                         //display score
                         stroke(0,0,0);
                         fill(255, 255, 255);
@@ -530,6 +526,7 @@ draw = function() {
                             highScore = score;
                         }
                         
+                        //sends pipes off screen after death
                         if(dead) {
                             for (var i =0; i < numPipes; i++) {
                                 pipes[i].y -= 1000;
@@ -540,4 +537,3 @@ draw = function() {
         scene3();
     }
 };
-
