@@ -264,7 +264,7 @@ var drawBird = function(x,y) {
     ellipse(40+x,53+y,17,8);
     ellipse(40+x,57+y,15,5);
     //Wing
-    fill(255, 250, 189);
+    fill(227, 217, 109);
     ellipse(14+x,52+y,17,8);
 };
 
@@ -387,19 +387,77 @@ mouseReleased = function() {
 
     //scene1 function
     var scene1 = function () {
-        background(12, 227, 126);
+          var x = 0;
+        
+        //background code
+        background(105, 198, 224);
+        var building = 98;
+        var x = 10;
+    
+    //Clouds
+    noStroke();
+    fill(255, 255, 255);
+    rect(0, 314-20, 401, 135);
+    for (var c = 0; c < 4; c++)
+    {
+        ellipse(124 * c, 313- 20, 66, 69);
+        ellipse(124 * c - 86, 327-20, 52, 71);
+        ellipse(125 * c + 79, 320-20, 59, 68);
+    }
+    //Buildings
+    fill(214, 210, 219);
+    stroke(0, 0, 0);
+    strokeWeight(0.5);
+    
+    for(var i = 0; i<9; i++) {
+        
+        rect(building * i - 40, 340 - 20, 19 ,119);
+        rect(building * i - 52, 349 - 20, 28 ,53);
+        rect(building * i - 32, 359 - 20, 18 ,47);
+        rect(building * i - 1, 344 - 20, 32, 58);
+        rect(building * i - 17, 324 - 20, 27, 100);
+        
+    }
+
+    //Bushes
+    for (var b = 0; b < 7; b++) {
+        
+        fill(80, 209, 54);
+        ellipse(78 * b - 50, 390 - 20 ,42,46);
+        ellipse(78 * b, 390 - 20, 42,40);
+        ellipse(78 * b - 26, 390 - 20, 43,30);
+        ellipse(78 * b - 58, 392 - 20, 39,30);
+        ellipse(78 * b - 82, 400 - 20, 36,30);
+        ellipse(78 * b - 27, 399 - 20, 38,30);
+        
+    }
+
+    //Foreground 
+    fill(227, 230, 147);
+    rect(0, 375, 400, 50);
+    fill(63, 245, 17);
+    rect(0, 368, 400, 8);
+
+    for (var i = 0; i < 44; i++) {
+        
+        fill(29, 194, 8);
+        noStroke();
+        rect(x + i*20, 368,10,7);  
+    }
+    
         strokeWeight(1);
         textSize(30);
         fill(0, 0, 0);
-        text("Flappy Bird", 115, 95);
+        text("Flappy Bird", 119, 77);
         textSize(10);
         text("by Nathan Lichtenfels", 10, 380);
         text("and Ryan Kraus", 307, 380);
         fill(255, 255, 255);
-        rect(15, 275, 83, 100);
-        rect(300, 275, 83, 100);
-        drawbitmoji(10, 260, 70);
-        drawBitmoji(292,266,50);
+        rect(17, 19, 83, 100);
+        rect(300, 15, 83, 100);
+        drawbitmoji(10, 0, 70);
+        drawBitmoji(291,4,50);
+        drawBird(168,118);
         startButton.draw();
     };
 
