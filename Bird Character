@@ -1,0 +1,21 @@
+var drawBird = function(x,y) {
+    
+   
+    //Body
+    fill(251, 255, 0);
+    ellipse(70 + x,150 + y,34,29);
+    //Eye
+    fill(242, 239, 242);
+    ellipse(78+x,146+y,15,13);
+    fill(0, 0, 0);
+    ellipse(79+x,145+y,2,3);
+    //Beak
+    fill(245, 98, 0);
+    ellipse(85+x,153+y,17,8);
+      ellipse(85+x,157+y,15,5);
+    //Wing
+    fill(255, 250, 189);
+    ellipse(58+x,152+y,17,8);
+};
+
+drawBird(100,100);
