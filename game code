@@ -265,7 +265,7 @@ var drawBird = function(x,y) {
     ellipse(40+x,57+y,15,5);
     //Wing
     fill(255, 250, 189);
-    ellipse(23+x,52+y,17,8);
+    ellipse(14+x,52+y,17,8);
 };
 
 //playable character constructor function
