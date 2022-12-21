@@ -449,7 +449,8 @@ mouseReleased = function() {
         textSize(30);
         fill(0, 0, 0);
         text("Flappy Bird", 119, 77);
-        textSize(10);
+        textSize(12);
+        text("Just click your mouse to jump and fly away!",86,240);
         text("by Nathan Lichtenfels", 10, 380);
         text("and Ryan Kraus", 307, 380);
         fill(255, 255, 255);
