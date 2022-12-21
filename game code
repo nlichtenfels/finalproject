@@ -314,6 +314,7 @@ character.prototype.checkCollision = function(pipe) {
 };
 
 //playable character definition
+var characterStill = new character(168, 118);
 var characterPlay = new character(20, 180);
 
 //pipes constructor function
@@ -342,7 +343,7 @@ var pipes = [];
 
 //for loop that creates random pipe locations at game start
 for(var i = 0; i < numPipes; i++) {
-    pipes.push(new pipe(i * 250 + 300, random(-100, 120)));
+    pipes.push(new pipe(i * 250 + 300, random(-90, 120)));
 }
 
 //creates new pipe locations + gets rid of old values
@@ -353,7 +354,7 @@ var resetGame = function () {
     
     //pushes new values
     for(var i = 0; i < numPipes; i++) {
-        pipes.push(new pipe(i * 250 + 300, random(-100,120))); 
+        pipes.push(new pipe(i * 250 + 300, random(-90,120))); 
     }
     
 };
@@ -383,166 +384,157 @@ mouseReleased = function() {
     canJump = true;
 };
 
-//scene functions
+/**scene functions**/
 
-    //scene1 function
+    //menu
     var scene1 = function () {
-          var x = 0;
         
         //background code
-        background(105, 198, 224);
         var building = 98;
         var x = 10;
-    
-    //Clouds
-    noStroke();
-    fill(255, 255, 255);
-    rect(0, 314-20, 401, 135);
-    for (var c = 0; c < 4; c++)
-    {
+        background(105, 198, 224);
+        
+        //Clouds
+        noStroke();
+        fill(255, 255, 255);
+        rect(0, 314-20, 401, 135);
+        for (var c = 0; c < 4; c++) {
         ellipse(124 * c, 313- 20, 66, 69);
         ellipse(124 * c - 86, 327-20, 52, 71);
         ellipse(125 * c + 79, 320-20, 59, 68);
-    }
-    //Buildings
-    fill(214, 210, 219);
-    stroke(0, 0, 0);
-    strokeWeight(0.5);
-    
-    for(var i = 0; i<9; i++) {
+        }
         
-        rect(building * i - 40, 340 - 20, 19 ,119);
-        rect(building * i - 52, 349 - 20, 28 ,53);
-        rect(building * i - 32, 359 - 20, 18 ,47);
-        rect(building * i - 1, 344 - 20, 32, 58);
-        rect(building * i - 17, 324 - 20, 27, 100);
+        //Buildings
+        fill(214, 210, 219);
+        stroke(0, 0, 0);
+        strokeWeight(0.5);
+        for(var i = 0; i<9; i++) {
+            rect(building * i - 40, 340 - 20, 19 ,119);
+            rect(building * i - 52, 349 - 20, 28 ,53);
+            rect(building * i - 32, 359 - 20, 18 ,47);
+            rect(building * i - 1, 344 - 20, 32, 58);
+            rect(building * i - 17, 324 - 20, 27, 100);
+        }
         
-    }
-
-    //Bushes
-    for (var b = 0; b < 7; b++) {
+        //Bushes
+        for (var b = 0; b < 7; b++) {
+            fill(80, 209, 54);
+            ellipse(78 * b - 50, 390 - 20 ,42,46);
+            ellipse(78 * b, 390 - 20, 42,40);
+            ellipse(78 * b - 26, 390 - 20, 43,30);
+            ellipse(78 * b - 58, 392 - 20, 39,30);
+            ellipse(78 * b - 82, 400 - 20, 36,30);
+            ellipse(78 * b - 27, 399 - 20, 38,30);
+        }
         
-        fill(80, 209, 54);
-        ellipse(78 * b - 50, 390 - 20 ,42,46);
-        ellipse(78 * b, 390 - 20, 42,40);
-        ellipse(78 * b - 26, 390 - 20, 43,30);
-        ellipse(78 * b - 58, 392 - 20, 39,30);
-        ellipse(78 * b - 82, 400 - 20, 36,30);
-        ellipse(78 * b - 27, 399 - 20, 38,30);
+        //Foreground 
+        fill(227, 230, 147);
+        rect(0, 375, 400, 50);
+        fill(63, 245, 17);
+        rect(0, 368, 400, 8);
+        for (var i = 0; i < 44; i++) {
+            fill(29, 194, 8);
+            noStroke();
+            rect(x + i*20, 368,10,7);  
+        }
         
-    }
-
-    //Foreground 
-    fill(227, 230, 147);
-    rect(0, 375, 400, 50);
-    fill(63, 245, 17);
-    rect(0, 368, 400, 8);
-
-    for (var i = 0; i < 44; i++) {
-        
-        fill(29, 194, 8);
-        noStroke();
-        rect(x + i*20, 368,10,7);  
-    }
-    
         strokeWeight(1);
         textSize(30);
         fill(0, 0, 0);
         text("Flappy Bird", 119, 77);
-        textSize(12);
-        text("Just click your mouse to jump and fly away!",86,240);
+        textSize(10);
         text("by Nathan Lichtenfels", 10, 380);
         text("and Ryan Kraus", 307, 380);
+        stroke(0, 0, 0);
         fill(255, 255, 255);
         rect(17, 19, 83, 100);
         rect(300, 15, 83, 100);
         drawbitmoji(10, 0, 70);
         drawBitmoji(291,4,50);
-        drawBird(168,118);
+        characterStill.draw();
         startButton.draw();
     };
 
-    //scene 2
+    //game
     var scene2 = function() {
         
-        var x = 0;
-        
         //background code
-        background(105, 198, 224);
-        var building = 98;
         var x = 10;
-    
-    //Clouds
-    noStroke();
-    fill(255, 255, 255);
-    rect(0, 314-20, 401, 135);
-    for (var c = 0; c < 4; c++)
-    {
+        var building = 98;
+        background(105, 198, 224);
+        
+        
+        //Clouds
+        noStroke();
+        fill(255, 255, 255);
+        rect(0, 314-20, 401, 135);
+        for (var c = 0; c < 4; c++){
         ellipse(124 * c, 313- 20, 66, 69);
         ellipse(124 * c - 86, 327-20, 52, 71);
         ellipse(125 * c + 79, 320-20, 59, 68);
-    }
-    //Buildings
-    fill(214, 210, 219);
+        }
+        
+        //Buildings
+        fill(214, 210, 219);
+        stroke(0, 0, 0);
+        strokeWeight(0.5);
+        for(var i = 0; i<9; i++) {
+            rect(building * i - 40, 340 - 20, 19 ,119);
+            rect(building * i - 52, 349 - 20, 28 ,53);
+            rect(building * i - 32, 359 - 20, 18 ,47);
+            rect(building * i - 1, 344 - 20, 32, 58);
+            rect(building * i - 17, 324 - 20, 27, 100);
+        }
+
+        //Bushes
+        for (var b = 0; b < 7; b++) {
+            fill(80, 209, 54);
+            ellipse(78 * b - 50, 390 - 20 ,42,46);
+            ellipse(78 * b, 390 - 20, 42,40);
+            ellipse(78 * b - 26, 390 - 20, 43,30);
+            ellipse(78 * b - 58, 392 - 20, 39,30);
+            ellipse(78 * b - 82, 400 - 20, 36,30);
+            ellipse(78 * b - 27, 399 - 20, 38,30);
+        }
+        
+        //Foreground 
+        fill(227, 230, 147);
+        rect(0, 375, 400, 50);
+        fill(63, 245, 17);
+        rect(0, 368, 400, 8);
+        for (var i = 0; i < 44; i++) {
+            fill(29, 194, 8);
+            noStroke();
+            rect(x + i*20, 368,10,7);  
+        }
+    
     stroke(0, 0, 0);
-    strokeWeight(0.5);
-    
-    for(var i = 0; i<9; i++) {
-        
-        rect(building * i - 40, 340 - 20, 19 ,119);
-        rect(building * i - 52, 349 - 20, 28 ,53);
-        rect(building * i - 32, 359 - 20, 18 ,47);
-        rect(building * i - 1, 344 - 20, 32, 58);
-        rect(building * i - 17, 324 - 20, 27, 100);
-        
-    }
-
-    //Bushes
-    for (var b = 0; b < 7; b++) {
-        
-        fill(80, 209, 54);
-        ellipse(78 * b - 50, 390 - 20 ,42,46);
-        ellipse(78 * b, 390 - 20, 42,40);
-        ellipse(78 * b - 26, 390 - 20, 43,30);
-        ellipse(78 * b - 58, 392 - 20, 39,30);
-        ellipse(78 * b - 82, 400 - 20, 36,30);
-        ellipse(78 * b - 27, 399 - 20, 38,30);
-        
-    }
-
-    //Foreground 
-    fill(227, 230, 147);
-    rect(0, 375, 400, 50);
-    fill(63, 245, 17);
-    rect(0, 368, 400, 8);
-
-    for (var i = 0; i < 44; i++) {
-        
-        fill(29, 194, 8);
-        noStroke();
-        rect(x + i*20, 368,10,7);  
-    }
-    
     characterPlay.draw();
     
     };  
     
-    //death scene
+    //death screen
     var scene3 = function() {
         stroke(5, 84, 6);
         fill(35, 158, 121);
         rect(50, 50, 300, 300);
         fill(3, 56, 3);
         fill(0,0,0);
+        textSize(20);
         text("Score = " + score, 155, 220);
         text("High-Score = " + highScore, 130, 245);
         textSize(40);
         text("Game Over!", 90, 90);
         stroke(0, 0, 0);
         strokeWeight(1);
-        fill(222, 141, 27);
+        fill(255, 255, 255);
+        rect(80, 150, 55, 75);
+        rect(262.5, 150, 55, 75);
         restartButton.draw();
         quitButton.draw();
+        drawbitmoji(75, 140, 50);
+        drawBitmoji(250, 140, 40);
+        
     };
     
     
@@ -557,6 +549,8 @@ draw = function() {
     
     if (currentScene === 0) {
         scene1();
+        
+        //reset framecount
         fc = 0;
     }
     else if (currentScene === 1) {
