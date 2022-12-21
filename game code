@@ -1,16 +1,16 @@
 //global variables
-var currentScene = 0;
-var numPipes = 200;
-var score = 0;
-var highScore = 0;
-var tbc = 0;
-var speed = 2;
-var canScore = true;
-var canJump = true;
-var dead = false;
-var fc = 0;
+var currentScene = 0; //controls scene being shown
+var numPipes = 300; //sets number of pipes
+var score = 0; //score tracker
+var highScore = 0; //highscore tracker
+var ta = 0; //counter tracking acceleration done to player by physics model
+var speed = 2; //speed constant for player phsyics
+var canScore = true; //boolean statement controlling when player scores
+var canJump = true; //boolean statement restricting players from holding the mouse button 
+var dead = false; //boolean statement determining if player has lost
+var fc = 0; //frame counter
 
-//khan button class + modifiers
+//khan button class 
 var Button = function(config) {
     this.x = config.x || 0;
     this.y = config.y || 0;
@@ -21,6 +21,7 @@ var Button = function(config) {
     this.onClick = config.onClick || function() {};
 };
 
+//draw method
 Button.prototype.draw = function() {
     fill(this.color);
     rect(this.x, this.y, this.width, this.height, 5);
@@ -30,6 +31,7 @@ Button.prototype.draw = function() {
     text(this.label, this.x+10, this.y+this.height/4);
 };
 
+//mouse detection
 Button.prototype.isMouseInside = function() {
     return mouseX > this.x &&
            mouseX < (this.x + this.width) &&
@@ -37,6 +39,7 @@ Button.prototype.isMouseInside = function() {
            mouseY < (this.y + this.height);
 };
 
+//mouseclick response
 Button.prototype.handleMouseClick = function() {
     if (this.isMouseInside()) {
         this.onClick();
@@ -282,7 +285,7 @@ character.prototype.draw = function() {
 
 //character movement
 character.prototype.down = function() {
-    this.y += speed*tbc;
+    this.y += speed*ta;
 };
 
 //collision model
@@ -566,11 +569,11 @@ draw = function() {
         fc =0;
         
         //bird physics 
-        tbc += 0.1;
+        ta += 0.1;
             
             //allows for character movement + basic character physics
             if (mouseIsPressed && canJump) {
-                tbc = -2;
+                ta = -2;
                 canJump = false;
             }
             else  {
